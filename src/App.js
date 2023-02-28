@@ -1,12 +1,13 @@
 import React from "react";
-import CreateNewPost from "./components/CreateNewPost";
 import AppRouter from "./router/AppRouter";
+import store from "./app/store";
+import { Provider } from "react-redux";
 
 const App = () => {
   return (
-    <div>
-     <AppRouter />
-    </div>
+     <Provider store={store}>
+      <AppRouter />
+    </Provider>
   );
 };
 

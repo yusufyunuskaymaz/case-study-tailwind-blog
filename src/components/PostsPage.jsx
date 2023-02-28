@@ -1,25 +1,34 @@
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
+import { useDispatch, useSelector  } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import {allPosts} from "../features/blogSlice"
+
   
   export default function PostsPage() {
+
+    const dispatch = useDispatch() 
     const navigate = useNavigate() 
-    const [posts, setPosts] = useState([])
+    // const [posts, setPosts] = useState([])
     const getData = ()=>{
       const URL = "https://jsonplaceholder.typicode.com/posts"
       axios.get(URL).then((res)=>{
         const userPost = res.data.filter((item)=>{
           return item.userId === 1
         })
-        setPosts(userPost)
+        // setPosts(userPost)
+        dispatch(allPosts(userPost))
       })
     }
     useEffect(() => {
       getData()
     }, [])
-    console.log(posts)
-    
+
+    // blog posts coming from redux
+    const { blog } = useSelector((state) => state.blog);
+console.log(blog)
+
     return (
       <div className="bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -30,7 +39,7 @@ import { useNavigate } from "react-router-dom"
             </p>
           </div> */}
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {posts.map((post) => (
+            {blog.map((post) => (
               <article key={post.id}  className="flex max-w-xl flex-col items-start justify-between"
               onClick={()=>navigate("post-detail", {state:post})}
               >
