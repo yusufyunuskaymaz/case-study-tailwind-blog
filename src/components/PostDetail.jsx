@@ -8,7 +8,16 @@ export default function PostDetail() {
   const navigate = useNavigate()
   const [title, setTitle] = useState(state.title)
   const [body, setBody] = useState(state.body)
-
+  
+  const deletePost = async ()=>{
+    if(window.confirm("Are you sure to delete this post")){
+        const URL = "https://jsonplaceholder.typicode.com/posts/1"
+        const res = await axios.delete(URL).then((res)=>{
+            console.log(res,"silindi")
+    
+        })
+    }
+  }
   const updatePost = async ()=>{
     const data = {
         id:state.id,
@@ -97,7 +106,7 @@ export default function PostDetail() {
                   <button
                     type="button"
                     className="inline-flex mr-4 justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                    // onClick={()=>postData()}
+                    onClick={()=>deletePost()}
                   >
                     Delete
                   </button>
