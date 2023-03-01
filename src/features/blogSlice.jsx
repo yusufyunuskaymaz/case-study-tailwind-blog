@@ -23,7 +23,7 @@ const blogPosts = createSlice({
             }
         },
         deletePost : (state, {payload})=>{
-            
+            state.blog = state.blog.filter((post) => post.id !== payload);
         }
     }
 })

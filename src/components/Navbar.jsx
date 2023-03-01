@@ -55,7 +55,7 @@ export default function Navbar() {
                         "rounded-md px-3 py-2 text-sm font-medium"
                       )}
                     >
-                      Deneme
+                      Navbar
                     </Link>
                     {navigation.map((item) => (
                       <a

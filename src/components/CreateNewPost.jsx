@@ -19,8 +19,8 @@ export default function CreateNewPost() {
   const postData = async () => {
     console.log("first")
     const data = {
-      title: "title",
-      body: "body",
+      title: title,
+      body: body,
       userId: 1,
     };
     const URL = "https://jsonplaceholder.typicode.com/posts";
@@ -28,6 +28,7 @@ export default function CreateNewPost() {
     const res2 = await axios.post(URL, data).then((res) => {
       if(res.status === 201){
         dispatch(addPost(data));
+        navigate("/")
       }
     });
      

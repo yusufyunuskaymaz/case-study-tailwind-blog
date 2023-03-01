@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updatePost } from "../features/blogSlice";
+import { updatePost, deletePost } from "../features/blogSlice";
 
 
 export default function PostDetail() {
@@ -17,11 +17,14 @@ export default function PostDetail() {
     e.preventDefault();
   };
 
-  const deletePost = async () => {
+  const deleteSinglePost = async () => {
     if (window.confirm("Are you sure to delete this post")) {
-      const URL = "https://jsonplaceholder.typicode.com/posts/1";
+      const id = state.id
+      const URL = `https://jsonplaceholder.typicode.com/posts/${id}`;
       const res = await axios.delete(URL).then((res) => {
         console.log(res, "silindi");
+        dispatch(deletePost(id))
+        navigate("/")
       });
     }
   };
@@ -36,6 +39,7 @@ export default function PostDetail() {
     const res2 = await axios.put(URL, data).then((res)  => {
         if(res.status === 200){
           dispatch(updatePost(data))
+          navigate("/")
         }
       
     });
@@ -115,7 +119,7 @@ console.log(blog,"blog")
                   <button
                     type="button"
                     className="inline-flex mr-4 justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                    onClick={() => deletePost()}
+                    onClick={() => deleteSinglePost()}
                   >
                     Delete
                   </button>
