@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -15,6 +16,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { blog } = useSelector((state) => state.blog);
+
   const navigate = useNavigate();
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -84,6 +87,7 @@ export default function Navbar() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+                <h5 className="text-white">{blog.length}</h5>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
