@@ -36,7 +36,7 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="flex items-center md:order-2">
-          <ul className="flex items-center flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex items-center gap-0 flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               
               <span className="font-bold" style={{color:"#737373"}} >Posts <span class="bg-green-100 text-green-900 font-bold text-sm relative bottom-3 px-1 py-0.5 rounded-full dark:bg-green-900 dark:text-green-800">{blog.length}</span></span>
@@ -44,7 +44,7 @@ export default function Navbar() {
               
             </li>
             <li>
-            <HiBell size={"1.5em"} color="#737373" />
+            <HiBell className="" size={"1.5em"} color="#737373" />
             </li>
             <li>
             <HiSquares2X2 size={"1.5em"} color="#737373" />

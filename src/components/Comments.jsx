@@ -5,7 +5,7 @@ const Comments = ({ postId }) => {
   const [postComments, setPostComments] = useState([]);
 
   const getComment = async () => {
-    const URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
+    const URL = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`;
     const { data } = await axios.get(URL);
     const comments = data.filter((item) => {
       return item.postId === postId;
