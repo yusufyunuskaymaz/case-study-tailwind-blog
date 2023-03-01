@@ -22,7 +22,8 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+   <div className="mx-auto max-w-7xl mt-10 ">
+     <nav className="bg-white border-gray-200  sm:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <Link to="/" className="flex items-center">
           <img
@@ -73,5 +74,6 @@ export default function Navbar() {
       </div> */}
       </div>
     </nav>
+   </div>
   );
 }
