@@ -60,7 +60,7 @@ export default function PostDetail() {
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div className="flex justify-between">
                     <div className="flex items-center">
-                    <div className="p-2 rounded-full mr-4" style={{backgroundColor:"#f4f5f4"}} onClick={()=>navigate(-1)}>
+                    <div className="p-2 rounded-full mr-4 hover:cursor-pointer" style={{backgroundColor:"#f4f5f4"}} onClick={()=>navigate(-1)}>
                       <BsArrowLeft size={"1.5em"}  />
                     </div>
                       <h1 className="text-2xl font-bold">Posts</h1>
