@@ -1,36 +1,47 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { updatePost } from "../features/blogSlice";
 
 
 export default function PostDetail() {
   const { state } = useLocation();
-  const navigate = useNavigate()
-  const [title, setTitle] = useState(state.title)
-  const [body, setBody] = useState(state.body)
-  
-  const deletePost = async ()=>{
-    if(window.confirm("Are you sure to delete this post")){
-        const URL = "https://jsonplaceholder.typicode.com/posts/1"
-        const res = await axios.delete(URL).then((res)=>{
-            console.log(res,"silindi")
-    
-        })
-    }
-  }
-  const updatePost = async ()=>{
-    const data = {
-        id:state.id,
-        title:title,
-        body:body,
-        userId:state.userId,
-    }
-    const URL = "https://jsonplaceholder.typicode.com/posts/1"
-        const res = await axios.put(URL, data).then((res)=>{
-            console.log(res,"cevap2")
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [title, setTitle] = useState(state.title);
+  const [body, setBody] = useState(state.body);
 
-        })
-  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const deletePost = async () => {
+    if (window.confirm("Are you sure to delete this post")) {
+      const URL = "https://jsonplaceholder.typicode.com/posts/1";
+      const res = await axios.delete(URL).then((res) => {
+        console.log(res, "silindi");
+      });
+    }
+  };
+  const updateSinglePost = async () => {
+    const data = {
+      id: state.id,
+      title: title,
+      body: body,
+      userId: state.userId,
+    };
+    const URL = "https://jsonplaceholder.typicode.com/posts/1";
+    const res2 = await axios.put(URL, data).then((res)  => {
+        if(res.status === 200){
+          dispatch(updatePost(data))
+        }
+      
+    });
+  };
+  const { blog } = useSelector((state) => state.blog);
+console.log(blog,"blog")
 
   return (
     <>
@@ -38,16 +49,14 @@ export default function PostDetail() {
         <div className="md:grid md:grid-cols-4 mt-10 md:gap-6">
           <div className="md:col-span-1"></div>
           <div className="mt-5 md:col-span-2 md:mt-0">
-            <form
-            //   method="GET"
-              //    onSubmit={(e)=>handleSubmit(e)}
-            >
+            <form method="GET" onSubmit={(e) => handleSubmit(e)}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div className="flex justify-between">
                     <div className="flex items-center">
-                      <button className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      onClick={()=>navigate(-1)}
+                      <button
+                        className="mr-2 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        onClick={() => navigate(-1)}
                       >
                         Back
                       </button>
@@ -56,7 +65,7 @@ export default function PostDetail() {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      onClick={()=>navigate("/post-create")}
+                      onClick={() => navigate("/post-create")}
                     >
                       New Post
                     </button>
@@ -72,12 +81,12 @@ export default function PostDetail() {
                     <input
                       type="text"
                       name="first-name"
-                    //   value={state.title}
+                      //   value={state.title}
                       id="first-name"
                       defaultValue={state.title}
                       autoComplete="given-name"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      onChange={(e)=>setTitle(e.target.value)}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
 
@@ -97,7 +106,7 @@ export default function PostDetail() {
                         defaultValue={state.body}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="you@example.com"
-                          onChange={(e)=>setBody(e.target.value)}
+                        onChange={(e) => setBody(e.target.value)}
                       />
                     </div>
                   </div>
@@ -106,14 +115,14 @@ export default function PostDetail() {
                   <button
                     type="button"
                     className="inline-flex mr-4 justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                    onClick={()=>deletePost()}
+                    onClick={() => deletePost()}
                   >
                     Delete
                   </button>
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    onClick={()=>updatePost()}
+                    onClick={() => updateSinglePost()}
                   >
                     Update
                   </button>

@@ -10,24 +10,10 @@ import {allPosts} from "../features/blogSlice"
 
     const dispatch = useDispatch() 
     const navigate = useNavigate() 
-    // const [posts, setPosts] = useState([])
-    const getData = ()=>{
-      const URL = "https://jsonplaceholder.typicode.com/posts"
-      axios.get(URL).then((res)=>{
-        const userPost = res.data.filter((item)=>{
-          return item.userId === 1
-        })
-        // setPosts(userPost)
-        dispatch(allPosts(userPost))
-      })
-    }
-    useEffect(() => {
-      getData()
-    }, [])
+ 
 
     // blog posts coming from redux
     const { blog } = useSelector((state) => state.blog);
-console.log(blog)
 
     return (
       <div className="bg-white">

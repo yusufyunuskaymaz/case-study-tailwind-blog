@@ -6,7 +6,6 @@ import addPost from "../features/blogSlice";
 const store = configureStore({
   reducer: {
     blog: blogPosts,
-    // addPost:addPost
   },
 });
 

@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addPost } from "../features/blogSlice";
 
+
 export default function CreateNewPost() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -14,12 +17,20 @@ export default function CreateNewPost() {
     e.preventDefault();
   };
   const postData = async () => {
+    console.log("first")
     const data = {
       title: "title",
       body: "body",
       userId: 1,
     };
-    dispatch(addPost(data));
+    const URL = "https://jsonplaceholder.typicode.com/posts";
+
+    const res2 = await axios.post(URL, data).then((res) => {
+      if(res.status === 201){
+        dispatch(addPost(data));
+      }
+    });
+     
   };
   return (
     <>

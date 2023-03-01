@@ -9,13 +9,18 @@ const blogPosts = createSlice({
     initialState,
     reducers:{
         allPosts:(state,{payload})=>{
-            state.blog = [...state.blog,payload]
+            state.blog = payload
         },
         addPost: (state, {payload}) => {
+            console.log(state.blog)
             state.blog = [...state.blog, payload]
         },
-        updatePost:(state)=>{
-            state.blog = []
+        updatePost:(state, {payload})=>{
+            const { id, title, body, userId } = payload;
+            const postIndex = state.blog.findIndex((post) => post.id === id);
+            if (postIndex !== -1) {
+              state.blog[postIndex] = { id, title, body, userId };
+            }
         },
         deletePost : (state, {payload})=>{
             
