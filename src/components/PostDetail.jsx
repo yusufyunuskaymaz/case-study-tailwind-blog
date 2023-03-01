@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updatePost, deletePost } from "../features/blogSlice";
+import Comments from "./Comments";
 
 
 export default function PostDetail() {
@@ -142,6 +143,7 @@ console.log(blog,"blog")
           <div className="border-t border-gray-200" />
         </div>
       </div>
+      <Comments postId={state.id} />
     </>
   );
 }
